@@ -1,5 +1,10 @@
 package org.jenkinsci.plugins.customuserproperties;
 
+/**
+ * Class to hold key value Pairs to be used in {@link CustomUserProperties}
+ * 
+ * @author nabel.sawiris
+ */
 public class KeyValuePair {
 	private String key;
 	private String value;

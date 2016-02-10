@@ -1,0 +1,25 @@
+<div>
+	<p>Custom User Properties Key/Value pairs. Keys can be duplicated. You
+		can access the properties from Groovy by using something similar to
+		the following code:</p>
+
+	<pre>
+	<code>
+	import org.jenkinsci.plugins.customuserproperties.CustomUserProperties;
+	import org.jenkinsci.plugins.customuserproperties.KeyValuePair;
+	
+	CustomUserProperties getCurrentUserProperties = User.current().getProperty(CustomUserProperties.class);
+	List&ltKeyValuePair&gt getCurrentUserKeyValuePairs = getCurrentUserProperties.getUserProperties();
+
+ 	for(i=0;i &lt getCurrentUserKeyValuePairs.size();i++) {
+		println('row:' + (i+1).toString());
+		println('key: ' + getCurrentUserKeyValuePairs.get(i).getKey());
+		println("value: " + getCurrentUserKeyValuePairs.get(i).getValue());
+		println("");
+	}
+	
+	// Or
+	println(getCurrentUserProperties.getPropertyValues('test').toString())
+	</code>
+	</pre>
+</div>

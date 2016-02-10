@@ -1,0 +1,51 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<!--
+    This jelly script is used for per-project configuration.
+
+    See global.jelly for a general discussion about jelly script.
+  -->
+
+	<!--
+    Creates a repeatable with a key and value text field to hold Custom User Properties
+    When submitted, it will be passed to the corresponding constructor parameter.
+  -->
+	<!--
+  <f:entry title="userProperties" field="userProperties">
+    <f:textbox />
+  </f:entry>
+-->
+	<!--
+<f:entry title="${%Loggers}"
+               description="${%List of loggers and the log levels to record}"
+               help="/help/LogRecorder/logger.html">
+-->
+	<f:entry title="Custom User Properties" description="Custom User Properties" help="/plugin/custom-user-properties/help/CustomUserProperties/help.html">
+		<f:repeatable var="it" items="${instance.userProperties}" name="userProperties">
+			<table width="100%">
+				<tr>
+					<th style="white-space:nowrap;">
+                Key
+              </th>
+					<td width="60%">
+						<f:textbox field="key" value="${it.key}" />
+					</td>
+					<th style="white-space:nowrap;">
+                Value
+              </th>
+					<td>
+						<f:textbox field="value" value="${it.value}" />
+					</td>
+					<td>
+						<f:repeatableDeleteButton />
+					</td>
+				</tr>
+			</table>
+		</f:repeatable>
+	</f:entry>
+	<f:entry>
+		<f:invisibleEntry>
+			<input type="hidden" name="custom-user-properties" value="true" />
+		</f:invisibleEntry>
+	</f:entry>
+</j:jelly>
