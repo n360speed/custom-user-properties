@@ -4,35 +4,25 @@
     This jelly script is used for per-project configuration.
 
     See global.jelly for a general discussion about jelly script.
-  -->
+	-->
 
 	<!--
-    Creates a repeatable with a key and value text field to hold Custom User Properties
-    When submitted, it will be passed to the corresponding constructor parameter.
-  -->
-	<!--
-  <f:entry title="userProperties" field="userProperties">
-    <f:textbox />
-  </f:entry>
--->
-	<!--
-<f:entry title="${%Loggers}"
-               description="${%List of loggers and the log levels to record}"
-               help="/help/LogRecorder/logger.html">
--->
+		Creates a repeatable with a key and value text field to hold Custom User Properties
+		When submitted, it will be passed to the corresponding constructor parameter.
+	-->
 	<f:entry title="Custom User Properties" description="Custom User Properties" help="/plugin/custom-user-properties/help/CustomUserProperties/help.html">
 		<f:repeatable var="it" items="${instance.userProperties}" name="userProperties">
 			<table width="100%">
 				<tr>
 					<th style="white-space:nowrap;">
-                Key
-              </th>
+                		Key
+              		</th>
 					<td width="60%">
-						<f:textbox field="key" value="${it.key}" />
-					</td>
+						<f:textbox field="key" value="${it.key}" name="key" />							
+					</td>					
 					<th style="white-space:nowrap;">
-                Value
-              </th>
+                		Value
+              		</th>
 					<td>
 						<f:textbox field="value" value="${it.value}" />
 					</td>
@@ -40,12 +30,18 @@
 						<f:repeatableDeleteButton />
 					</td>
 				</tr>
+				<tr class="validation-error-area">
+					<td />
+					<td />
+					<td colspan="3" />
+				</tr>
 			</table>
 		</f:repeatable>
 	</f:entry>
 	<f:entry>
 		<f:invisibleEntry>
 			<input type="hidden" name="custom-user-properties" value="true" />
+			<input type="hidden" name="hiddenUserProperties" value="${instance.userProperties}" />
 		</f:invisibleEntry>
 	</f:entry>
 </j:jelly>

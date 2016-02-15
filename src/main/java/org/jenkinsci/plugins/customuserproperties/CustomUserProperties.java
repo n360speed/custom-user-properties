@@ -4,6 +4,7 @@ import hudson.Extension;
 import hudson.model.UserProperty;
 import hudson.model.UserPropertyDescriptor;
 import hudson.model.User;
+import hudson.util.FormValidation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 
 /**
@@ -87,6 +89,19 @@ public class CustomUserProperties extends UserProperty {
 	 */
 	@Extension
 	public static final class DescriptorImpl extends UserPropertyDescriptor {
+
+		public FormValidation doCheckKey(@QueryParameter final String key, @QueryParameter final String hiddenUserProperties) {
+			if(key != null) {
+				if(hiddenUserProperties != null) {
+					FormValidation.error("hiddenUserProperties (" + hiddenUserProperties + ")");
+				}
+				if(hiddenUserProperties == key) {
+					return FormValidation.error("You can't have a duplicate key (" + key + ")");
+				}
+				return FormValidation.ok("ok: " + key);
+			}
+			return FormValidation.error("error: " + key);
+		}
 
 		public String getDisplayName() {
 			return "Custom User Properties";
